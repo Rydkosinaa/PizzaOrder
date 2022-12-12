@@ -10,9 +10,9 @@ namespace PizzaTest
         {
 
             Pizza pizza = new Pizza(Ingredient.Onion);
+            pizza.AddIngredient( Ingredient.Peperoni);
+            pizza.AddIngredient( Ingredient.Cheese);
 
-            pizza.AddIngredient(Ingredient.Peperoni);
-            pizza.AddIngredient(Ingredient.Cheese);
 
             var expected = 16;
             Assert.Equal(expected, pizza.PizzaPrice);

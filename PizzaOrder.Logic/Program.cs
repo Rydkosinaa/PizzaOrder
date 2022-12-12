@@ -10,7 +10,9 @@ public class Pizza
     {
         Ingredient.Dough
     };
+
     public double PizzaPrice { get; set; } = 10;
+
 
     public Pizza(Ingredient pizzaIngredients)
     {
@@ -19,8 +21,9 @@ public class Pizza
 
     }
 
-    public double AddIngredient(Ingredient ingredient)
+    public double AddIngredient( Ingredient ingredient)
     {
+
         this.PizzaIngredients.Add(ingredient);
         this.PizzaPrice += ingredient.Price;
         return this.PizzaPrice;
