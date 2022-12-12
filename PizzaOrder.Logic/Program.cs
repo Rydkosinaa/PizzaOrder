@@ -10,7 +10,7 @@ public class Pizza
     {
         Ingredient.Dough
     };
-    public double PizzaPrice { get; set; } = 10;
+    public double PizzaPrice { get; set; } = Ingredient.Dough.Price;
 
     public Pizza(Ingredient pizzaIngredients)
     {
@@ -45,9 +45,6 @@ public class Ingredient
         Name = name;
         Price = price;
     }
-
-
-
 }
 
 
