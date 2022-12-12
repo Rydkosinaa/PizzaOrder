@@ -1,7 +1,4 @@
-﻿
-
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
@@ -13,13 +10,7 @@ public class Pizza
     {
         Ingredient.Dough
     };
-    public double PizzaPrice { get; set; }
-
-    public Pizza()
-    {
-        PizzaIngredients = new List<Ingredient>(7);
-        PizzaPrice = 0;
-    }
+    public double PizzaPrice { get; set; } = 10;
 
     public Pizza(Ingredient pizzaIngredients)
     {
@@ -30,9 +21,9 @@ public class Pizza
 
     public double AddIngredient(Ingredient ingredient)
     {
-        Pizza pizza = new Pizza(ingredient);
-        pizza.PizzaPrice += ingredient.Price;
-        return pizza.PizzaPrice;
+        this.PizzaIngredients.Add(ingredient);
+        this.PizzaPrice += ingredient.Price;
+        return this.PizzaPrice;
     }
 
 
@@ -53,7 +44,6 @@ public class Ingredient
     {
         Name = name;
         Price = price;
-
     }
 
 
