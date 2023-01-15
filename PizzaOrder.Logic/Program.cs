@@ -9,15 +9,16 @@ public class Pizza
 {
     public double PizzaPrice { get; set; } = Ingredient.Dough.Price;
     public int rating=0;
+    public string Name = "Custom pizza";
 
     List<Ingredient> PizzaIngredients = new List<Ingredient>()
     {
         Ingredient.Dough
     };
 
-    public Pizza(List<Ingredient> pizzaIngredients)
+    public Pizza(List<Ingredient> pizzaIngredients, string name)
     {
-        
+        Name = name;
         foreach (var ingredient in pizzaIngredients )
         {
             PizzaIngredients.Add(ingredient);
@@ -61,31 +62,42 @@ public class Pizza
 public class Menu
 {
   
-    public Pizza Margarita = new Pizza( new List<Ingredient>() { Ingredient.Cheese, Ingredient.Tomato });
-    public Pizza Peperoni = new Pizza(new List<Ingredient>() { Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni });
-    public Pizza Mozarella = new Pizza(new List<Ingredient>() { Ingredient.Mozarella, Ingredient.Tomato, Ingredient.Peperoni });
-    public Pizza Vegetarian = new Pizza(new List<Ingredient>() { Ingredient.Tomato, Ingredient.Olives ,Ingredient.Salad});
+    static public Pizza Margarita = new Pizza( new List<Ingredient>() { Ingredient.Cheese, Ingredient.Tomato }, "Margarita");
+    static public Pizza Peperoni = new Pizza(new List<Ingredient>() { Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni }, "Peperoni");
+    static public Pizza Mozarella = new Pizza(new List<Ingredient>() { Ingredient.Mozarella, Ingredient.Tomato, Ingredient.Peperoni }, "Mozarella");
+    static public Pizza Vegetarian = new Pizza(new List<Ingredient>() { Ingredient.Tomato, Ingredient.Olives ,Ingredient.Salad}, "Vegetarian");
 
-    public List<Pizza> SortByRating(List<Pizza> pizzas)
+    public List<Pizza> PizzaMenu = new List<Pizza>() { Margarita, Peperoni, Mozarella, Vegetarian };
+
+    public Pizza GetPizza(string name)
     {
-        //var pizzas2 = from pizza in pizzas
-        //            orderby pizza.rating descending
-        //            select pizza;
-        //pizzas.Clear(); 
-        //foreach(var pizza in pizzas2)
-        //{
-        //    pizzas.Add(pizza);  
-        //}
+        foreach(var p in PizzaMenu)
+        {
+            if(p.Name == name)
+                return p;
+        }
+        return null;
+    }
+    public void Show()
+    {
+        foreach (Pizza pizza in PizzaMenu)
+        {
 
-        pizzas.Sort((p1, p2) => p1.rating.CompareTo(p2.rating));
-        pizzas.Reverse();
-        return pizzas;
+        }
+    }
+
+    public List<Pizza> SortByRating(Menu pizzas)
+    {
+
+        pizzas.PizzaMenu.Sort((p1, p2) => p1.rating.CompareTo(p2.rating));
+        pizzas.PizzaMenu.Reverse();
+        return pizzas.PizzaMenu;
     }
 }
 public class Order
 {
-    List<Pizza> orders = new List<Pizza>();
-    double price = 0;
+    public List<Pizza> orders = new List<Pizza>();
+    public double price = 0;
     //add
     public void PizzaAddToOrder(Pizza pizza)
     {
@@ -102,7 +114,7 @@ public class Order
         pizza.rating--;
     }
 
-  
+    
 
 }
 
