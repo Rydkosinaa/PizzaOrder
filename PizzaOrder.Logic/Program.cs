@@ -11,7 +11,8 @@ public class Pizza
         Ingredient.Dough
     };
 
-    public double PizzaPrice { get; set; } = 10;
+    public double PizzaPrice { get; set; } = Ingredient.Dough.Price;
+
 
 
     public Pizza(Ingredient pizzaIngredients)
@@ -29,12 +30,32 @@ public class Pizza
         return this.PizzaPrice;
     }
 
+    public double RemoveIngredient(Ingredient ingredient)
+    {
+
+        this.PizzaIngredients.Remove(ingredient);
+        this.PizzaPrice -= ingredient.Price;
+        return this.PizzaPrice;
+    }
 
     static void Main()
     {
 
     }
 }
+
+
+public class Menu
+{
+    public static readonly Pizza Margarita = new Pizza(Ingredient.Peperoni);
+
+    //List<Pizza> Order = new List<Pizza>()
+    //{
+    //   Pizza.
+    //};
+
+}
+
 public class Ingredient
 {
     public static readonly Ingredient Dough = new Ingredient("Dough", 10);
@@ -48,9 +69,6 @@ public class Ingredient
         Name = name;
         Price = price;
     }
-
-
-
 }
 
 

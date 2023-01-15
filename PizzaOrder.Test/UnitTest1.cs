@@ -18,6 +18,22 @@ namespace PizzaTest
             Assert.Equal(expected, pizza.PizzaPrice);
 
         }
+
+        [Fact]
+        public void RemoveIngredient_ReturnList()
+        {
+
+            Pizza pizza = new Pizza(Ingredient.Onion);
+            pizza.AddIngredient(Ingredient.Peperoni);
+            pizza.AddIngredient(Ingredient.Cheese);
+            pizza.RemoveIngredient(Ingredient.Peperoni);
+    
+
+
+            var expected = 15;
+            Assert.Equal(expected, pizza.PizzaPrice);
+
+        }
     }
 }
 
