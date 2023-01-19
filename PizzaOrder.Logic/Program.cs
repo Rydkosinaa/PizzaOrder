@@ -11,7 +11,7 @@ public class Pizza
     public int rating=0;
     public string Name = "Custom pizza";
 
-    List<Ingredient> PizzaIngredients = new List<Ingredient>()
+  public  List<Ingredient> PizzaIngredients = new List<Ingredient>()
     {
         Ingredient.Dough
     };
@@ -34,21 +34,22 @@ public class Pizza
         
     }
 
-    
-    public double AddIngredient( Ingredient ingredient)
+    public void AddIngredient( Ingredient ingredient)
     {
 
         this.PizzaIngredients.Add(ingredient);
         this.PizzaPrice += ingredient.Price;
-        return this.PizzaPrice;
+       
+        
     }
-
-    public double RemoveIngredient(Ingredient ingredient)
+   
+    public bool RemoveIngredient(Ingredient ingredient)
     {
-
-        this.PizzaIngredients.Remove(ingredient);
         this.PizzaPrice -= ingredient.Price;
-        return this.PizzaPrice;
+        return this.PizzaIngredients.Remove(ingredient);
+       //this.PizzaIngredients.Remove(ingredient);
+        //this.PizzaPrice -= ingredient.Price;
+        //return this.PizzaPrice;
     }
 
     static void Main()
@@ -78,20 +79,12 @@ public class Menu
         }
         return null;
     }
-    public void Show()
+
+
+    public List<Pizza> SortByRating()
     {
-        foreach (Pizza pizza in PizzaMenu)
-        {
-
-        }
-    }
-
-    public List<Pizza> SortByRating(Menu pizzas)
-    {
-
-        pizzas.PizzaMenu.Sort((p1, p2) => p1.rating.CompareTo(p2.rating));
-        pizzas.PizzaMenu.Reverse();
-        return pizzas.PizzaMenu;
+        PizzaMenu.Sort((p1, p2) => p2.rating.CompareTo(p1.rating));
+        return PizzaMenu;
     }
 }
 public class Order
@@ -113,9 +106,6 @@ public class Order
         this.price -= pizza.PizzaPrice;
         pizza.rating--;
     }
-
-    
-
 }
 
 public class Ingredient

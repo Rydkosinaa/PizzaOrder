@@ -12,10 +12,13 @@ namespace PizzaTest
             Pizza pizza = new Pizza(Ingredient.Onion);
             pizza.AddIngredient( Ingredient.Peperoni);
             pizza.AddIngredient( Ingredient.Cheese);
+  
+           
+            List <Ingredient> expected = new List<Ingredient>() { Ingredient.Dough, Ingredient.Onion, Ingredient.Peperoni, Ingredient.Cheese };
 
+            // 
 
-            var expected = 16;
-            Assert.Equal(expected, pizza.PizzaPrice);
+            Assert.Equal(expected, pizza.PizzaIngredients);
 
         }
 
@@ -27,29 +30,33 @@ namespace PizzaTest
             pizza.AddIngredient(Ingredient.Peperoni);
             pizza.AddIngredient(Ingredient.Cheese);
             pizza.RemoveIngredient(Ingredient.Peperoni);
-    
+
+            List<Ingredient> expected = new List<Ingredient>() { Ingredient.Dough, Ingredient.Onion, Ingredient.Cheese };
 
 
-            var expected = 15;
-            Assert.Equal(expected, pizza.PizzaPrice);
+            //
+         
+            Assert.Equal(expected, pizza.PizzaIngredients);
 
         }
 
         [Fact]
-        public void CheckOrderAdd_ReturnPrice()
+        public void CheckOrderAdd_ReturnList()
         {
             Menu menu = new Menu();
             Order order = new Order();
 
-            order.PizzaAddToOrder(menu.GetPizza("Margarita"));
+            order.PizzaAddToOrder(menu.GetPizza("Peperoni"));
 
 
-            var expected = 18;
-            Assert.Equal(expected, order.price);
+            List<Pizza> expected = new List<Pizza>() { Menu.Peperoni };
+
+
+            Assert.Equal(expected, order.orders);
         }
 
         [Fact]
-        public void CheckOrderDel_ReturnPrice()
+        public void CheckOrderDel_ReturnList()
         {
             Menu menu = new Menu();
             Order order = new Order();
@@ -57,9 +64,10 @@ namespace PizzaTest
             order.PizzaAddToOrder(menu.GetPizza("Margarita"));
             order.PizzaAddToOrder(menu.GetPizza("Peperoni"));
             order.PizzaRemoveFromOrder(menu.GetPizza("Peperoni"));
+            List<Pizza> expected = new List<Pizza>() { Menu.Margarita};
 
-            var expected = 18;
-            Assert.Equal(expected, order.price);
+           
+            Assert.Equal(expected, order.orders);
         }
 
         [Fact]
@@ -71,7 +79,7 @@ namespace PizzaTest
             order.PizzaAddToOrder(menu.GetPizza("Peperoni"));
            
 
-            var expected = 1;
+            var expected = 2;
             Assert.Equal(expected, menu.GetPizza("Peperoni").rating);
         }
 
@@ -84,7 +92,7 @@ namespace PizzaTest
             order.PizzaAddToOrder(menu.GetPizza("Peperoni"));
 
             var expected = "Peperoni";
-            Assert.Equal(expected, menu.SortByRating(menu).First().Name);
+            Assert.Equal(expected, menu.SortByRating().First().Name);
         }
     }
 }
