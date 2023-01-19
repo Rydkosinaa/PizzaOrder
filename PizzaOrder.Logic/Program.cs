@@ -94,9 +94,12 @@ public class Order
     //add
     public void PizzaAddToOrder(Pizza pizza)
     {
-        this.orders.Add(pizza);
-        this.price+= pizza.PizzaPrice;
-        pizza.rating++;
+        if (pizza != null)
+        {
+            this.orders.Add(pizza);
+            this.price += pizza.PizzaPrice;
+            pizza.rating++;
+        }
     }
 
     //remove

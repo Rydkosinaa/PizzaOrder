@@ -94,6 +94,17 @@ namespace PizzaTest
             var expected = "Peperoni";
             Assert.Equal(expected, menu.SortByRating().First().Name);
         }
+
+        [Fact]
+        public void NullException()
+        {
+            Order order = new Order();
+            order.PizzaAddToOrder(null);
+
+            var expected = 0;
+            Assert.Equal(expected, order.orders.Count());
+
+        }
     }
 }
 
